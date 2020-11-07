@@ -13,17 +13,16 @@ services:
       placement:
          constraints:
            - node.labels.jitsi.jitsi-config-web == true
-           
-          labels:
-             - traefik.enable=true
-             - traefik.docker.network=traefik-public
-             - traefik.constraint-label=traefik-public
-             - traefik.http.routers.wsfs-http.rule=Host(`webtorrent.teams.cyber.lk`)
-             - traefik.http.routers.wsfs-http.entrypoints=http
-             - traefik.http.routers.wsfs-http.middlewares=https-redirect
-             - traefik.http.routers.wsfs-https.rule=Host(`webtorrent.teams.cyber.lk`)
-             - traefik.http.routers.wsfs-https.entrypoints=https
-             - traefik.http.routers.wsfs-https.tls=true
-             - traefik.http.routers.wsfs-https.tls.certresolver=le
-             - traefik.http.services.wsfs.loadbalancer.server.port=8000
+         labels:
+           - traefik.enable=true
+           - traefik.docker.network=traefik-public
+           - traefik.constraint-label=traefik-public
+           - traefik.http.routers.wsfs-http.rule=Host(`webtorrent.teams.cyber.lk`)
+           - traefik.http.routers.wsfs-http.entrypoints=http
+           - traefik.http.routers.wsfs-http.middlewares=https-redirect
+           - traefik.http.routers.wsfs-https.rule=Host(`webtorrent.teams.cyber.lk`)
+           - traefik.http.routers.wsfs-https.entrypoints=https
+           - traefik.http.routers.wsfs-https.tls=true
+           - traefik.http.routers.wsfs-https.tls.certresolver=le
+           - traefik.http.services.wsfs.loadbalancer.server.port=8000
    
