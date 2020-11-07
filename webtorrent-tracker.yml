@@ -1,12 +1,29 @@
 
 version: '3.7'
 services:
-  bittorrent-tracker:
-    image: cghub/bittorrent-tracker
-    container_name: bittorrent-tracker
+  wsfs:
+    image: cghub/webtorrent-tracker
+    container_name: webtorrent-tracker
     network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
       - STATS=true # optionally add your configuration here
+    deploy:
+      placement:
+         constraints:
+           - node.labels.jitsi.jitsi-config-web == true
+           
+          labels:
+             - traefik.enable=true
+             - traefik.docker.network=traefik-public
+             - traefik.constraint-label=traefik-public
+             - traefik.http.routers.wsfs-http.rule=Host(`webtorrent.teams.cyber.lk`)
+             - traefik.http.routers.wsfs-http.entrypoints=http
+             - traefik.http.routers.wsfs-http.middlewares=https-redirect
+             - traefik.http.routers.wsfs-https.rule=Host(`webtorrent.teams.cyber.lk`)
+             - traefik.http.routers.wsfs-https.entrypoints=https
+             - traefik.http.routers.wsfs-https.tls=true
+             - traefik.http.routers.wsfs-https.tls.certresolver=le
+             - traefik.http.services.wsfs.loadbalancer.server.port=8000
    
