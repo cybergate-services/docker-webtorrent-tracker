@@ -1,0 +1,10 @@
+services:
+  bittorrent-tracker:
+    image: quoorex/bittorrent-tracker
+    container_name: bittorrent-tracker
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - STATS=true # optionally add your configuration here
+    restart: unless-stopped
