@@ -6,5 +6,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - STATS=true # optionally add your configuration here
+      - STATS=true
+      - HTTP=true
+      - UDP=true
+      - WEBSOCKET=true
+      - TRUST_PROXY=true
     restart: unless-stopped
